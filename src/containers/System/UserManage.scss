@@ -1,0 +1,85 @@
+#customers {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#customers td,
+#customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#customers tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+    background-color: #ddd;
+}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+}
+
+.btn-edit{
+    width: 50px;
+    border: none;
+    outline: none;
+    background:  transparent;
+    color: orange;
+    &:hover {
+        background-color: transparent !important;
+        color: red;
+    }
+}
+
+.btn-delete{
+    width: 50px;
+    border: none;
+    outline: none;
+    background:  transparent;
+    color: rgb(241, 17, 17);
+    &:hover {
+        background-color: transparent !important;
+        color: rgb(56, 14, 225);
+    }
+}
+
+.modal-user-container{
+    .modal-header{
+        button {
+            background-color: transparent !important;
+            border: none;
+            color: white;
+            font-size: 30px;
+        }
+    }
+
+    .modal-user-body{
+        display: flex;
+        gap : 10px;
+        flex-wrap: wrap;
+        .input-container{
+            display: flex;
+            flex-direction:  column;
+            width: 45%;
+            &.max-width-input {
+                width: 91%;
+            }
+            input{
+                border-radius: 3px;
+                border: 1px solid gray;
+                height: 30px;
+                outline: none;
+                padding: 10px;
+            }
+        }
+    }
+}
+
+
