@@ -32,6 +32,7 @@
                 "header": "Quản trị hệ thống",
                 "user-manage": "Quản lý người sử dụng",
                 "product-manage": "Quản lý gói",
+                "exam-manage": "Quản lý Bài Thi",
                 "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
             },
             "system-parameter": {

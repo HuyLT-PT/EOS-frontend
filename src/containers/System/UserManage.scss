@@ -43,13 +43,25 @@
     border: none;
     outline: none;
     background:  transparent;
-    color: rgb(241, 17, 17);
+    color: rgb(64, 236, 12);
     &:hover {
         background-color: transparent !important;
-        color: rgb(56, 14, 225);
+        color: rgb(246, 21, 28);
     }
 }
+.btn-download {
+    width: 50px;
+    transform: rotate(90deg);
+    outline: none;
+    border: none;
+    background:transparent;
+    color: #04bdf6ef;
 
+&:hover {
+        background-color: transparent !important;
+        color: rgb(245, 60, 4);
+    }
+}
 .modal-user-container{
     .modal-header{
         button {

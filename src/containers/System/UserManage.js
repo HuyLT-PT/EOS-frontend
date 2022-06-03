@@ -115,7 +115,7 @@ class UserManage extends Component {
         }
     }
     render() {
-        //console.log('check render', this.state)
+        console.log('check render', this.state)
         let arrUsers = this.state.arrUsers
         return (
             <div className="user-container">
@@ -160,7 +160,7 @@ class UserManage extends Component {
                         
                             {
                                 arrUsers && arrUsers.map((item, index) => {
-                                  //  console.log('check map ',item,index)
+                                    console.log('check map ',item,index)
                                     return (
                                         <tr>
                                             <td>{item.id} </td>
