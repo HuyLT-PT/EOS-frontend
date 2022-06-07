@@ -81,7 +81,7 @@ class ModalUser extends Component {
                     toggle={() => { this.toggle() }}
                     className={'modal-user-container'}
                     size='lg'
-                    centered
+                    centered 
                 >
                     <ModalHeader toggle={() => { this.toggle() }}>Create new user</ModalHeader>
                     <ModalBody>

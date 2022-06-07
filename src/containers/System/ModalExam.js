@@ -81,7 +81,7 @@ class ModalExam extends Component {
                     size='lg'
                     centered
                 >
-                    <ModalHeader toggle={() => { this.toggle() }}>Create new user</ModalHeader>
+                    <ModalHeader toggle={() => { this.toggle() }}>Create new exam</ModalHeader>
                     <ModalBody>
                         <div className='modal-user-body'>
                             <div className='input-container'>

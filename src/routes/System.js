@@ -5,6 +5,7 @@ import UserManage from '../containers/System/UserManage';
 import ProductManage from '../containers/System/ProductManage';
 import RegisterPackageGroupOrAcc from '../containers/System/RegisterPackageGroupOrAcc';
 import ExamManage from '../containers/System/ExamManage';
+import Question from '../containers/System/Question';
 class System extends Component {
     render() {
         const { systemMenuPath } = this.props;
@@ -14,6 +15,7 @@ class System extends Component {
                     <Switch>
                         <Route path="/system/user-manage" component={UserManage} />
                         <Route path="/system/exam-manage" component={ExamManage} />
+                        <Route path="/system/question-manage" component={Question} />
                         <Route path="/system/product-manage" component={ProductManage} />
                         <Route path="/system/register-package-group-or-account" component={RegisterPackageGroupOrAcc} />
                         <Route component={() => { return (<Redirect to={systemMenuPath} />) }} />

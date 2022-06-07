@@ -59,7 +59,7 @@
 
 &:hover {
         background-color: transparent !important;
-        color: rgb(245, 60, 4);
+        color: rgb(250, 0, 0);
     }
 }
 .modal-user-container{
@@ -93,5 +93,16 @@
         }
     }
 }
+.btn-view {
+    width: 50px;
+    outline: none;
+    border: none;
+    background: transparent;
+    color: #fd08b3ef;
 
+    &:hover {
+        background-color: transparent !important;
+        color: rgb(255, 0, 0);
+    }
+}
 

@@ -1,26 +1,38 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { getAllExams,deleteExamSevice,editExamSevice,createNewExamSevice} from '../../services/examSevice'
+import { getAllExams, deleteExamSevice, editExamSevice, createNewExamSevice } from '../../services/examSevice'
+import {getAllQuestions}  from '../../services/questionSevice'
 import ModalEditExam from './ModalEditExam';
 import ModalExam from './ModalExam';
 import { emitter } from '../../utils/emitter'
-
+import { useHistory } from "react-router-dom";
+import history from '../../history';
+import ModalQuestion from './ModalQuestion';
+import ModalQuestionView from './ModalQuestionView';
+import ModalQuestionList from './ModalQuestionList';
     
 class ExamManage extends Component {
-    // ham tao state
+    // state
    constructor(props) {
        super(props);
        this.state = {
+           STT: [],
            arrExams: [],
+           arrQuestions:[] ,
            isOpenModalEditExam: false,
            isOpenModalExam : false,
-           examEdit: {}
+           examEdit: {},
+           isOpenModalQuestionList: false,
+           isOpenModalEditQuestion: false,
+           currentExamFromExamList: {},
+           questionEdit : {}
        }
     }
 
    async componentDidMount() {
        await this.getAllExamsFromReact();
+  
     }
 /*  life cycle
    * run component
@@ -28,6 +40,31 @@ class ExamManage extends Component {
    * 2. DidMount ( set state ) -> 
    * 3. render
 */
+    
+    // toggle
+    toggleExamModal = () => {      
+      this.setState({
+            isOpenModalExam: !this.state.isOpenModalExam
+      })         
+    } 
+    toggleExamEditModal = () => {
+        this.setState({
+            isOpenModalEditExam: !this.state.isOpenModalEditExam 
+      })    
+    }
+    toggQuestionModal = () => {
+        this.setState({
+            isOpenModalQuestionList: !this.state.isOpenModalQuestionList
+      }) 
+    }
+    toggleQuestionEditModal = () => {
+        this.setState({
+            isOpenModalEditQuestion: !this.state.isOpenModalEditQuestion,
+            isOpenModalQuestionList: !this.state.isOpenModalQuestionList
+      }) 
+    }
+
+    // exam 
     getAllExamsFromReact = async() => {
         let response = await getAllExams('ALL')
        if (response && response.errCode === 0) {
@@ -41,16 +78,6 @@ class ExamManage extends Component {
            isOpenModalExam: true,
         })
     
-    }
-    toggleExamModal = () => {      
-      this.setState({
-            isOpenModalExam: !this.state.isOpenModalExam
-      })         
-    } 
-    toggleExamEditModal = () => {
-        this.setState({
-            isOpenModalEditExam: !this.state.isOpenModalEditExam 
-      })    
     }
     createNewExam =async (data) => {
         
@@ -85,14 +112,28 @@ class ExamManage extends Component {
         }
     }
     handleEditExam = (exam) => {
-        console.log('check',exam)
         this.setState({
             isOpenModalEditExam: true,
             examEdit : exam
         })
     }
     handleDowloadExam=(exam) => {
-        alert('hihihi')
+         alert('hihihi')
+
+    }
+    handleViewExam = async(exam) => { 
+        
+        let arr = []
+        let length = exam.numberOfQuestion
+       // await this.getAllExamsFromReact(exam.id)      
+        for (let i = 0; i < length; i++){
+            arr.push(i+1)
+        }
+        this.setState({
+                isOpenModalQuestionList: !this.state.isOpenModalQuestionList ,
+                currentExamFromExamList: exam,
+                STT: arr             
+        })
     }
     doEditExam = async (exam) => {
         try {
@@ -111,9 +152,38 @@ class ExamManage extends Component {
             console.log(e)
         }
     }
+    // Question
+
+    editQuestion = () => {
+
+        this.setState({
+          //  isOpenModalEditQuestion: false ,
+            isOpenModalQuestionList : !this.state.isOpenModalQuestionList
+        })
+    }
+   /* doEditQuestion = async(question) => {
+        try {
+            let res = await editExamSevice(question)
+            if (res && res.errCode === 0) {
+                this.setState({
+                    isOpenModalEditQuestion: false 
+                    
+                })
+                await this.getAllQuestionsFromExam()
+            } else {
+                alert (res.errCode)
+            }
+           
+        } catch (e) {
+            console.log(e)
+        }
+    } */
     render() {
-        console.log('check render', this.state)
+        //console.log('exam question', this.state.currentExamFromExamList.id)
+        //console.log('exam edit', this.state.examEdit)
         let arrExams = this.state.arrExams
+        let curEx = this.state.currentExamFromExamList
+        //console.log('check1 ', this.state.arrQuestions)
         return (
             <div className="Exam-container">
                 <ModalExam  
@@ -129,6 +199,26 @@ class ExamManage extends Component {
                         currentExam={this.state.examEdit}
                         editExam ={this.doEditExam}
                     />
+
+                }
+                {   
+                    this.state.isOpenModalQuestionList &&
+                    <ModalQuestionList
+                        isOpen={this.state.isOpenModalQuestionList}
+                        toggleQuestionModal={this.toggQuestionModal}
+                        editQuestion={this.editQuestion}
+                        getCurrentExam={this.state.currentExamFromExamList}
+                        STT={this.state.STT}
+                    />
+                }
+                {
+        /*            this.state.isOpenModalEditQuestion &&
+                    <ModalQuestionView
+                        isOpen={this.state.isOpenModalEditQuestion}
+                        toggleQuestionEditModal={this.toggleQuestionEditModal}
+                        editQuestion={this.doEditQuestion}
+                        currentQuestion = {this.state.questionEdit} 
+                    /> */
                 }
 
                 <div className='title text-center'>Manage Exam</div>
@@ -155,7 +245,7 @@ class ExamManage extends Component {
                         
                             {
                                 arrExams && arrExams.map((item, index) => {
-                                    console.log('check map ',item,index)
+                               // console.log('check map ',item,index)
                                     return (
                                         <tr>
                                             <td>{item.id} </td>
@@ -169,6 +259,7 @@ class ExamManage extends Component {
                                             <td>
                                                 <button className='btn-edit' onClick={() => { this.handleEditExam(item) }}><i className='fas fa-pencil-alt'></i></button>
                                                 <button className='btn-delete' onClick={() => { this.handleDeleteExam(item) }}><i className='fas fa-trash-alt'></i></button>
+                                                <button className='btn-view' onClick={() => { this.handleViewExam(item) }}><i className='far fa-eye'></i></button>
                                                 <button className='btn-download' onClick={() => { this.handleDowloadExam(item) }}><i className='fas fa-sign-out-alt'></i></button>
                                             </td>
                                         </tr>

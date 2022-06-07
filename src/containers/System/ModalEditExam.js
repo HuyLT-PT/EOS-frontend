@@ -15,7 +15,7 @@ class ModalEditExam extends Component {
            subject: '',
            time: '',
            numberOfQuestion: '',
-           impclass:'',
+           impClass:'',
        }
     }
 
@@ -69,8 +69,8 @@ class ModalEditExam extends Component {
     }
 
     render() {
-           // console.log(this.props)
-           // console.log(this.props.isOpen)
+         //  console.log( 'edit ',this.state.id)
+        //   console.log(this.props.isOpen)
         return (
             <>
                 <Modal
