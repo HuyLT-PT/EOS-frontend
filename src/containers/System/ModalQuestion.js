@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { emitter } from '../../utils/emitter'
-import { getAllExams} from '../../services/examSevice'
+import { getAllExams} from '../../services/examService'
 import _ from 'lodash'
 class ModalQuestion extends Component {
 

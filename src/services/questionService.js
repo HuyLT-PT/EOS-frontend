@@ -6,7 +6,7 @@ const getAllQuestions = (inputId) => {
     // template string
     return axios.get(`/api/get-question?id=${inputId}`);
 }
-const editQuestionSevice = (data) => {
+const editQuestionService = (data) => {
     return axios.put('/api/edit-question', data)
 }
 
@@ -15,6 +15,6 @@ const downloadExamFromReact = () => {
 }
 export {
     getAllQuestions,
-    editQuestionSevice,
+    editQuestionService,
     downloadExamFromReact
 }

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { emitter } from '../../utils/emitter'
 import _ from 'lodash'
-import { getAllQuestions , editQuestionSevice } from '../../services/questionSevice'
+import { getAllQuestions , editQuestionService } from '../../services/questionService'
 import ModalQuestionView from './ModalQuestionView';
 
 class ModalQuestionList extends Component {
@@ -87,7 +87,7 @@ class ModalQuestionList extends Component {
     doEditQuestion = async(question) => {
         try {
            
-            let res = await editQuestionSevice(question)
+            let res = await editQuestionService(question)
             //console.log (res)
             if (res.errCode === 0) {
                 this.setState({

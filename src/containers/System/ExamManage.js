@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { getAllExams, deleteExamSevice, editExamSevice, createNewExamSevice } from '../../services/examSevice'
-import {getAllQuestions}  from '../../services/questionSevice'
+import { getAllExams, deleteExamService, editExamService, createNewExamService } from '../../services/examService'
+import {getAllQuestions}  from '../../services/questionService'
 import ModalEditExam from './ModalEditExam';
 import ModalExam from './ModalExam';
 import { emitter } from '../../utils/emitter'
@@ -89,7 +89,7 @@ class ExamManage extends Component {
     createNewExam =async (data) => {
         
         try {
-            let response = await createNewExamSevice(data)
+            let response = await createNewExamService(data)
             if (response && response.errCode !== 0) {
                 alert(response.errMessage)
             } else {
@@ -107,7 +107,7 @@ class ExamManage extends Component {
     }
     handleDeleteExam = async(exam) => {
         try {
-            let res = await deleteExamSevice(exam.id)
+            let res = await deleteExamService(exam.id)
             if (res && res.errCode === 0) {
                 await this.getAllExamsFromReact();
             } else {
@@ -149,7 +149,7 @@ class ExamManage extends Component {
     }
     doEditExam = async (exam) => {
         try {
-            let res = await editExamSevice(exam)
+            let res = await editExamService(exam)
             if (res && res.errCode === 0) {
                 this.setState({
                     isOpenModalEditExam: false 

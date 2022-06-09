@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { emitter } from '../../utils/emitter'
 import _ from 'lodash'
-import {getAllQuestions, downloadExamFromReact}  from '../../services/questionSevice'
+import {getAllQuestions, downloadExamFromReact}  from '../../services/questionService'
 import ReactToPdf from 'react-to-pdf'
 import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
 import { useRef } from 'react';

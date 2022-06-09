@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManage.scss'
-import { getAllusers , deleteUserSevice} from '../../services/userSevice'
+import { getAllusers , deleteUserService} from '../../services/userService'
 import ModalUser from './ModalUser';
-import { createNewUserSevice, editUserSevice } from '../../services/userSevice'
+import { createNewUserService, editUserService } from '../../services/userService'
 import { emitter } from '../../utils/emitter'
 import ModalEditUser from './ModalEditUser';
     
@@ -61,7 +61,7 @@ class UserManage extends Component {
     createNewUser =async (data) => {
         
         try {
-            let response = await createNewUserSevice(data)
+            let response = await createNewUserService(data)
             if (response && response.errCode !== 0) {
                 alert(response.errMessage)
             } else {
@@ -79,7 +79,7 @@ class UserManage extends Component {
     }
     handleDeleteUser = async(user) => {
         try {
-            let res = await deleteUserSevice(user.id)
+            let res = await deleteUserService(user.id)
             if (res && res.errCode === 0) {
                 await this.getAllUsersFromReact();
             } else {
@@ -100,7 +100,7 @@ class UserManage extends Component {
     }
     doEditUser = async (user) => {
         try {
-            let res = await editUserSevice(user)
+            let res = await editUserService(user)
             if (res && res.errCode === 0) {
                 this.setState({
                     isOpenModalEditUser :false
@@ -148,6 +148,7 @@ class UserManage extends Component {
                             <th scope="col">Email</th>
                             <th scope="col">FirstName</th>
                             <th scope="col">LastName</th>
+                            <th scope="col">Class</th>
                             <th scope="col">DateOfBirth</th>
                             <th scope="col">PhoneNumber</th>
                             <th scope="col">Address</th>
@@ -167,6 +168,7 @@ class UserManage extends Component {
                                             <td>{item.email} </td>
                                             <td>{item.firstName} </td>
                                             <td>{item.lastName} </td>
+                                            <td>{item.class}</td>
                                             <td>{item.dateOfBirth} </td>
                                             <td>{item.phoneNumber} </td>
                                             <td>{item.address} </td>

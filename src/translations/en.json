@@ -31,6 +31,8 @@
             "system-administrator": {
                 "header": "System Administrator",
                 "user-manage": "User manage",
+                "class-manage" : "Class-manage",
+                "student-manage" : "Student-manage",
                 "product-manage": "Package manage",
                 "exam-manage": "Exam manage",
                 "register-package-group-or-account": "Register service package for group/account"

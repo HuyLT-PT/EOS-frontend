@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { emitter } from '../../utils/emitter'
 import _ from 'lodash'
-import {getAllQuestions}  from '../../services/questionSevice'
-import { getAllExams, deleteExamSevice, editExamSevice, createNewExamSevice } from '../../services/examSevice'
+import {getAllQuestions}  from '../../services/questionService'
+import { getAllExams, deleteExamService, editExamService, createNewExamService } from '../../services/examService'
 class Question extends Component {
 
    constructor(props) {
