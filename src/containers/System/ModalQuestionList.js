@@ -107,7 +107,7 @@ class ModalQuestionList extends Component {
         let STT = this.state.STT
         let arrQ = this.state.arrQuestions
         let q = this.state.questionEdit
-        console.log('Check state q', this.state.id)
+       // console.log('Check state q', this.props)
         return (
                 
             <>  {
@@ -140,6 +140,7 @@ class ModalQuestionList extends Component {
                                         <th scope="col">Exam Name</th>
                                             <th scope="col">Subject</th>
                                             <th scope="col">Content</th>
+                                            <th scope="col">Answer</th>
                                             <th scope="col">Actions</th>
                                      </tr>      
                             {
@@ -155,6 +156,7 @@ class ModalQuestionList extends Component {
                                             <td>{this.state.id} - { this.state.name}</td>
                                             <td>{this.state.subject}</td>
                                             <td>{arrQ[index].content}</td>  
+                                            <td>{arrQ[index].key }</td>
                                             <td>
                                                 <button className='btn-edit' onClick={() => { this.handleViewQuestion(arrQ[index]) }}><i className='fas fa-pencil-alt'></i></button>
                                             </td>
@@ -168,7 +170,7 @@ class ModalQuestionList extends Component {
                         </div>    
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" className='px-3'>Save</Button>{' '}
+                        <Button color="primary" className='px-3' onClick={() => { this.toggle() }}>Save</Button>{' '}
                         <Button color="secondary" className='px-3' onClick={() => { this.toggle() }}>Close</Button>
                     </ModalFooter>
                 </Modal>

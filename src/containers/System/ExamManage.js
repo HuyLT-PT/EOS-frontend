@@ -11,7 +11,7 @@ import history from '../../history';
 import ModalQuestion from './ModalQuestion';
 import ModalQuestionView from './ModalQuestionView';
 import ModalQuestionList from './ModalQuestionList';
-    
+import ModalDownload  from './ModalDownload';
 class ExamManage extends Component {
     // state
    constructor(props) {
@@ -26,7 +26,9 @@ class ExamManage extends Component {
            isOpenModalQuestionList: false,
            isOpenModalEditQuestion: false,
            currentExamFromExamList: {},
-           questionEdit : {}
+           questionEdit: {} ,
+           examForDownLoad: {},
+           isOpenModalDownload :  false
        }
     }
 
@@ -55,6 +57,11 @@ class ExamManage extends Component {
     toggQuestionModal = () => {
         this.setState({
             isOpenModalQuestionList: !this.state.isOpenModalQuestionList
+      }) 
+    }
+    toggleDownloadModal = () => {
+        this.setState({
+            isOpenModalDownload: !this.state.isOpenModalDownload
       }) 
     }
     toggleQuestionEditModal = () => {
@@ -118,8 +125,13 @@ class ExamManage extends Component {
         })
     }
     handleDowloadExam=(exam) => {
-         alert('hihihi')
-
+        let arr = exam
+       // console.log ('arr',arr)
+        this.setState({
+            isOpenModalDownload: !this.state.isOpenModalDownload ,
+            examForDownLoad : arr
+            
+        })
     }
     handleViewExam = async(exam) => { 
         
@@ -183,7 +195,7 @@ class ExamManage extends Component {
         //console.log('exam edit', this.state.examEdit)
         let arrExams = this.state.arrExams
         let curEx = this.state.currentExamFromExamList
-        //console.log('check1 ', this.state.arrQuestions)
+        //console.log('checkQList', this.state.currentExamFromExamList)
         return (
             <div className="Exam-container">
                 <ModalExam  
@@ -212,13 +224,12 @@ class ExamManage extends Component {
                     />
                 }
                 {
-        /*            this.state.isOpenModalEditQuestion &&
-                    <ModalQuestionView
-                        isOpen={this.state.isOpenModalEditQuestion}
-                        toggleQuestionEditModal={this.toggleQuestionEditModal}
-                        editQuestion={this.doEditQuestion}
-                        currentQuestion = {this.state.questionEdit} 
-                    /> */
+                   this.state.isOpenModalDownload &&
+                    <ModalDownload
+                        isOpen={this.state.isOpenModalDownload}
+                        toggleDownloadModal={this.toggleDownloadModal} 
+                        examForDownLoad ={this.state.examForDownLoad}
+                    /> 
                 }
 
                 <div className='title text-center'>Manage Exam</div>

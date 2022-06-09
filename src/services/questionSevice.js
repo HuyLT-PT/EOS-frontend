@@ -10,8 +10,11 @@ const editQuestionSevice = (data) => {
     return axios.put('/api/edit-question', data)
 }
 
-
+const downloadExamFromReact = () => {
+    return 
+}
 export {
     getAllQuestions,
     editQuestionSevice,
+    downloadExamFromReact
 }
