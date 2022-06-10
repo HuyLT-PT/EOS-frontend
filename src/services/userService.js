@@ -8,10 +8,14 @@ const getAllusers = (inputId) => {
     // template string
     return axios.get(`/api/get-user?id=${inputId}`);
 }
-const getAllStudents = (inputId) => {
+const getAllStudents = (classId) => {
     // template string
-    return axios.get(`/api/get-student?id=${inputId}`);
+    return axios.get(`/api/get-student?id=${classId}`);
 }
+/*const getTeacherFromClass = (teacherId) => {
+    // template string
+    return axios.get(`/api/get-teacher?id=${teacherId}`);
+}*/
 const createNewUserService = (data) => {
     return axios.post('/api/create-new-user',data)
 }
@@ -25,11 +29,16 @@ const deleteUserService = (userId) => {
 const editUserService = (data) => {
     return axios.put('/api/edit-user', data)
 }
+const saveStudentClass = (data) => {
+    return axios.put('/api/edit-student-class', data)
+}
 export {
     handleLoginApi,
     getAllusers,
     createNewUserService,
     deleteUserService,
     editUserService,
-    getAllStudents
+    getAllStudents,
+    saveStudentClass,
+    //getTeacherFromClass
 };

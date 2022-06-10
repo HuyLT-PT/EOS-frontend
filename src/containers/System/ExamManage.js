@@ -33,16 +33,14 @@ class ExamManage extends Component {
     }
 
    async componentDidMount() {
-       await this.getAllExamsFromReact();
-  
+       await this.getAllExamsFromReact(); 
     }
 /*  life cycle
    * run component
    * 1. run contructor -> init state
    * 2. DidMount ( set state ) -> 
    * 3. render
-*/
-    
+*/  
     // toggle
     toggleExamModal = () => {      
       this.setState({
@@ -93,7 +91,6 @@ class ExamManage extends Component {
             if (response && response.errCode !== 0) {
                 alert(response.errMessage)
             } else {
-                // eslint-disable-next-line no-undef
                 await this.getAllExamsFromReact();
                 this.setState({
                     isOpenModalExam : false
@@ -126,18 +123,15 @@ class ExamManage extends Component {
     }
     handleDowloadExam=(exam) => {
         let arr = exam
-       // console.log ('arr',arr)
         this.setState({
             isOpenModalDownload: !this.state.isOpenModalDownload ,
             examForDownLoad : arr
             
         })
     }
-    handleViewExam = async(exam) => { 
-        
+    handleViewExam = async(exam) => {        
         let arr = []
         let length = exam.numberOfQuestion
-       // await this.getAllExamsFromReact(exam.id)      
         for (let i = 0; i < length; i++){
             arr.push(i+1)
         }
@@ -167,35 +161,13 @@ class ExamManage extends Component {
     // Question
 
     editQuestion = () => {
-
         this.setState({
-          //  isOpenModalEditQuestion: false ,
             isOpenModalQuestionList : !this.state.isOpenModalQuestionList
         })
     }
-   /* doEditQuestion = async(question) => {
-        try {
-            let res = await editExamSevice(question)
-            if (res && res.errCode === 0) {
-                this.setState({
-                    isOpenModalEditQuestion: false 
-                    
-                })
-                await this.getAllQuestionsFromExam()
-            } else {
-                alert (res.errCode)
-            }
-           
-        } catch (e) {
-            console.log(e)
-        }
-    } */
     render() {
-        //console.log('exam question', this.state.currentExamFromExamList.id)
-        //console.log('exam edit', this.state.examEdit)
         let arrExams = this.state.arrExams
         let curEx = this.state.currentExamFromExamList
-        //console.log('checkQList', this.state.currentExamFromExamList)
         return (
             <div className="Exam-container">
                 <ModalExam  
@@ -256,7 +228,6 @@ class ExamManage extends Component {
                         
                             {
                                 arrExams && arrExams.map((item, index) => {
-                               // console.log('check map ',item,index)
                                     return (
                                         <tr>
                                             <td>{item.id} </td>

@@ -1,35 +1,76 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllStudents} from '../../services/userService'
+import { getAllStudents ,saveStudentClass} from '../../services/userService'
+import ModalStudent2Class from './ModalStudent2Class';
 class StudentManage extends Component {
 
    constructor(props) {
        super(props);
        this.state = {
-            arrStudens:[]
+           arrStudents: [],
+           isOpenModalAddStudent2Class: false,
+           currentStudent :{}
        }
     }
 
- async  componentDidMount() {
-    await this.getAllStudentsFromReact()
+    async  componentDidMount() {
+        await this.getAllStudentsFromReact()
  
+    }
+    toggleModalStudent2Class = () => {
+        this.setState({
+            isOpenModalAddStudent2Class: !this.state.isOpenModalAddStudent2Class
+      })   
     }
     getAllStudentsFromReact = async() => {
         let response = await getAllStudents('ALL')
-        console.log(response)
+       
        if (response && response.errCode === 0) {
            this.setState({
-               arrStudens: response.users
+               arrStudents: response.users
            },          
            ) 
        }
     }
-    render() {
-         let arrStudens = this.state.arrStudens
+    handleAddStudend2Class = (data) => {
         
+        this.setState({
+            isOpenModalAddStudent2Class: true,
+            currentStudent: data
+        })
+    } 
+    saveStudent = async(data) => {
+        try {
+     
+            let res = await saveStudentClass(data)
+            
+            if (res && res.errCode === 0) {
+                this.setState({
+                    isOpenModalAddStudent2Class: false 
+                    
+                })
+                await this.getAllStudentsFromReact()
+            } else {
+                alert (res.errCode)
+            }
+           
+        } catch (e) {
+            console.log(e) 
+        } 
+    }
+    render() {
+         let arrStudents = this.state.arrStudents
+         //   console.log(this.state)
         return (
             
             <>
+                {this.state.isOpenModalAddStudent2Class &&
+                <ModalStudent2Class
+                    isOpen={this.state.isOpenModalAddStudent2Class}
+                    toggle={this.toggleModalStudent2Class}
+                    currentStudent ={this.state.currentStudent}
+                    saveStudent = {this.saveStudent}
+                />}
                <div className="Exam-container">
                 <div className='title text-center'>Manage Student</div>
                 <div className='mx-1'>
@@ -57,7 +98,7 @@ class StudentManage extends Component {
                             <th scope="col">Actions</th>
                         </tr>
                                 {
-                                     arrStudens && arrStudens.map((item, index) => {
+                                     arrStudents && arrStudents.map((item, index) => {
                                 //    console.log('check map ',item,index)
                                     return (
                                         <tr>
@@ -74,7 +115,7 @@ class StudentManage extends Component {
                                             <td>{item.updatedAt} </td>
                                             <td>
                                                 <button className='btn-edit' ><i className='far fa-eye'></i></button>
-                                                <button className='btn-delete'><i className='fas fa-plus'></i></button>
+                                                <button className='btn-delete'><i className='fas fa-plus' onClick={() => { this.handleAddStudend2Class(item) }}></i></button>
                                             </td>
                                         </tr>
                                     )

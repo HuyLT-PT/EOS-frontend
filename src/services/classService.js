@@ -9,5 +9,5 @@ const getAllClasses = (inputId) => {
 
 export {
     getAllClasses,
-
+   
 }
