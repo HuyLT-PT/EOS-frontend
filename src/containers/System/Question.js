@@ -12,43 +12,64 @@ class Question extends Component {
        super(props);
        this.state = {
             arrQuestions :[] ,
-            arrExams: [],
        }
     }
 
  async  componentDidMount() {
-    
-     await this.getAllExamsFromReact()  
+      
      await this.getAllQuestionsFromExam() 
     }
-    getAllExamsFromReact = async() => {
-        let response = await getAllExams('ALL')
-       // console.log('test1', response )
-       if (response && response.errCode === 0) {
-           this.setState({
-               arrExams: response.exams
-           }) 
-        }
-      //  console.log('check 1.5',this.state.arrExams)
-    }
+
     getAllQuestionsFromExam = async() => {
-        let response = await getAllQuestions('ALL')
-      //  console.log('test2', response )
+        let response = await getAllQuestions(1)
+
        if (response && response.errCode === 0) {
            this.setState({
                arrQuestions: response.questionsList
            }) 
         }
-     //   console.log('check 2.5',this.state.arrQuestions)
     }
     render() {
-
+        let arr = this.state.arrQuestions
+        let arrT = []
+        for (let i = 0; i < 50; i++){
+            arrT.push(i+1)
+        }
+     
         return (
-            
             <>
-                hello                  
-                 
+                         <div className='Exam-table mt-3 mx-1'>
+                                <table id="customers">
+                                <tbody>
+                          
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Exam Name</th>
+                                            <th scope="col">Subject</th>
+                                            <th scope="col">Content</th>
+                                            <th scope="col">Answer</th>
+                                            <th scope="col">Actions</th>
+                                     </tr>      
+                            {
+                                        arrT && arrT.map((item, index) => {
+                                           // console.log ('check index ',arrQ[index])
+                        
+
+                                    return (
+                                        <tr>
+                                            <td>{item}</td>
+                                            
+                                        </tr>
+                                    )
+                                })
+                            }
+                                                                                                                         
+                               </tbody>
+                            </table>
+                        </div>    
+                   
             </>
+
         )
     }
 

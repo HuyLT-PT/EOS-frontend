@@ -12,6 +12,7 @@ import ModalQuestion from './ModalQuestion';
 import ModalQuestionView from './ModalQuestionView';
 import ModalQuestionList from './ModalQuestionList';
 import ModalDownload  from './ModalDownload';
+import { applyMiddleware } from 'redux';
 class ExamManage extends Component {
     // state
    constructor(props) {
@@ -129,6 +130,9 @@ class ExamManage extends Component {
             
         })
     }
+    handleDowload = (exam) => {
+        alert('choose')
+    }
     handleViewExam = async(exam) => {        
         let arr = []
         let length = exam.numberOfQuestion
@@ -243,6 +247,7 @@ class ExamManage extends Component {
                                                 <button className='btn-delete' onClick={() => { this.handleDeleteExam(item) }}><i className='fas fa-trash-alt'></i></button>
                                                 <button className='btn-view' onClick={() => { this.handleViewExam(item) }}><i className='far fa-eye'></i></button>
                                                 <button className='btn-download' onClick={() => { this.handleDowloadExam(item) }}><i className='fas fa-sign-out-alt'></i></button>
+                                                <button className='btn-download' onClick={() => { this.handleDowload(item) }}><a href='https://drive.google.com/file/d/1YGknZQx8t4i-aspKFXr8HH5fIDNs47aR/view' > <i className='fas fa-sign-out-alt'/></a></button>
                                             </td>
                                         </tr>
                                     )

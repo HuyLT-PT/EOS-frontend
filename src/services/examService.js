@@ -19,9 +19,13 @@ const createNewExamService = (data) => {
 const editExamService = (data) => {
     return axios.put('/api/edit-exam', data)
 }
+const getResultExam = (examId) => {
+    return axios.get(`/api/get-point?id=${examId}`)
+}
 export {
     getAllExams,
     deleteExamService,
     editExamService,
-    createNewExamService
+    createNewExamService,
+    getResultExam
 }

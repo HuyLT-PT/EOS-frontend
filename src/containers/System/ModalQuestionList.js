@@ -86,9 +86,17 @@ class ModalQuestionList extends Component {
 
     doEditQuestion = async(question) => {
         try {
-           
+ 
+            let arr = question.arrKey
+            question.key = ''
+                if (arr[0] === true) { question.key = question.key + ' '+ 'A' }
+                if (arr[1] === true) { question.key = question.key + ' '+ 'B'}
+                if (arr[2] === true) { question.key = question.key + ' '+ 'C' }
+                if (arr[3] === true) { question.key = question.key + ' '+ 'D' }
+          
+      
             let res = await editQuestionService(question)
-            //console.log (res)
+            
             if (res.errCode === 0) {
                 this.setState({
                     isOpenModalEditQuestion: false                    

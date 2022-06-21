@@ -1,7 +1,9 @@
+import { update } from 'lodash';
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { isForInStatement } from 'typescript';
 import { emitter } from '../../utils/emitter'
 
 class ModalQuestionView extends Component {
@@ -16,7 +18,8 @@ class ModalQuestionView extends Component {
             optionB: ' ',
             optionC: ' ',
             optionD: ' ',
-            key: ''
+            key: '',
+            arrKey: [false,false,false,false],
        }
 
     //   this.listenToEmitter()
@@ -51,14 +54,32 @@ class ModalQuestionView extends Component {
     handleOnChangeInput = (event, id) => {
         // should
         let copyState = { ...this.state }
+        
         copyState[id] = event.target.value
         this.setState({
             ...copyState
         }) 
     }
+
+    handleOnChangeAnswer = (event, id, option) => {
+        // should      
+        const { value, checked } = event.target;       
+        let arr = this.state.arrKey
+
+
+        if (checked) {             
+            arr[option] = true
+        } else {
+            arr[option] = false
+        }
+
+        this.setState({
+            arrKey: arr
+        })
+    }
     checkValideInput = () => {
         let isValid = true 
-        let arrInput = ['content', 'optionA', 'optionB', 'optionC', 'optionD','key']
+        let arrInput = ['content', 'optionA', 'optionB', 'optionC', 'optionD']
         for (let i = 0; i < arrInput.length;i++){
             if (!this.state[arrInput[i]]) {
                 isValid = false
@@ -70,6 +91,7 @@ class ModalQuestionView extends Component {
     }
     handleSaveQuestion = () => {
         let isValid = this.checkValideInput()
+       
         if (isValid === true) {
             // call api
            
@@ -78,7 +100,8 @@ class ModalQuestionView extends Component {
         
     }
     render() {
-        //console.log('check state', this.state)
+
+       
         return (
             <div className='Modal-question-container'>
                 {
@@ -115,14 +138,17 @@ class ModalQuestionView extends Component {
                                 <input type='text' onChange={(event)=>{this.handleOnChangeInput(event,'optionD')}} value={this.state.optionD}></input>
                             </div>
 
-                            <div className='input-container'>
-                                <label>Answer</label>
-                                <select type='text'onChange={(event)=>{this.handleOnChangeInput(event,'key')}} value={this.state.key}>
-                                        <option value="A">Option A</option>
-                                        <option value="B">Option B</option>
-                                        <option value="C">Option C</option>
-                                        <option value="D">Option D</option>
-                                </select>
+
+                            <div className=''>
+                                <label> Answer</label> <br></br>
+                                <input type='checkbox' onChange={(event)=>{this.handleOnChangeAnswer(event,'key','0')}} value='A'/> 
+                                <label> Option A</label> <br></br>
+                                <input type='checkbox' onChange={(event)=>{this.handleOnChangeAnswer(event,'key','1')}} value='B'/>
+                                <label >Option B</label> <br></br>
+                                <input type='checkbox'  onChange={(event)=>{this.handleOnChangeAnswer(event,'key','2')}} value='C'/>
+                                <label> Option C</label> <br></br>
+                                <input type='checkbox' onChange={(event)=>{this.handleOnChangeAnswer(event,'key','3')}} value='D'/>
+                                <label> Option D</label>
                             </div>
                         </div>       
                     </ModalBody>

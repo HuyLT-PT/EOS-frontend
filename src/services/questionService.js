@@ -13,8 +13,12 @@ const editQuestionService = (data) => {
 const downloadExamFromReact = () => {
     return 
 }
+const saveAnswer2DB = (data,answer) => {
+    return axios.put('/api/edit-student-answer', data)
+}
 export {
     getAllQuestions,
     editQuestionService,
-    downloadExamFromReact
+    downloadExamFromReact,
+    saveAnswer2DB
 }
