@@ -63,6 +63,7 @@
     }
 }
 .modal-user-container{
+  
     .modal-header{
         button {
             background-color: transparent !important;
@@ -125,5 +126,71 @@
         }
 
         
+    }
+}
+.modal-show-time{
+    margin-left: 75% ;
+    height: 300px;
+    width: 300px;
+    z-index: 1100 !important;
+    .modal-header {
+            button {
+                background-color: transparent !important;
+                border: none;
+                color: white;
+                font-size: 30px;
+            }
+        }
+}
+.modal-do-exam {
+    margin-left: 25%;
+    
+    .modal-header {
+            button {
+                background-color: transparent !important;
+                border: none;
+                color: white;
+                font-size: 30px;
+            }
+        }
+    
+        .modal-user-body {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+    
+            .input-container {
+                display: flex;
+                flex-direction: column;
+                width: 45%;
+    
+                &.max-width-input {
+                    width: 91%;
+                }
+    
+                input {
+                    border-radius: 3px;
+                    border: 1px solid gray;
+                    height: 30px;
+                    outline: none;
+                    padding: 10px;
+                }
+            }
+        }
+}
+.Student-Exam-container {
+    z-index: 1100;
+}
+.elm {
+    z-index: 1100;}
+.show-time-container{
+    background-color: red($color: #000000);
+    display: flex;
+    justify-content: center;
+    p { 
+        margin-right:10%;
+        margin-left: 10%;
+        width: 100px;
+        height: 30px;
     }
 }

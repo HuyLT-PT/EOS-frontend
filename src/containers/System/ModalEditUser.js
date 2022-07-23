@@ -15,7 +15,11 @@ class ModalEditUser extends Component {
            password: '',
            firstName: '',
            lastName: '',
-           address:'',
+           address: '',
+           class: '',
+           gender: '',
+           dateOfBirth: '',
+           phoneNumber :''
        }
 
 //       this.listenToEmitter()
@@ -41,7 +45,11 @@ class ModalEditUser extends Component {
                 password: 'hashcode',
                 firstName:user.firstName,
                 lastName: user.lastName,
-                address:user.address,
+                address: user.address,
+                class: user.class,
+                gender: user.gender,
+                dateOfBirth: user.dateOfBirth,
+                phoneNumber : user.phoneNumber
             })
         }
     }
@@ -113,8 +121,27 @@ class ModalEditUser extends Component {
                                 <input type='text' onChange={(event)=>{this.handleOnChangeInput(event,'lastName')}} value={this.state.lastName}></input>
                             </div>
                             <div className='input-container max-width-input'>
+                                <label>Class</label>
+                                <input type='text' onChange={(event)=>{this.handleOnChangeInput(event,'class')}} value={this.state.class}></input>
+                            </div>
+                            <div className='input-container max-width-input'>
                                 <label>Address</label>
                                 <input type='text' onChange={(event)=>{this.handleOnChangeInput(event,'address')}} value={this.state.address}></input>
+                            </div>
+                            <div className='input-container max-width-input'>
+                                <label>Date Of Birth</label>
+                                <input type='text' onChange={(event)=>{this.handleOnChangeInput(event,'dateOfBirth')}} value={this.state.dateOfBirth}></input>
+                            </div>
+                            <div className='input-container max-width-input'>
+                                <label>Phone Number</label>
+                                <input type='text' onChange={(event)=>{this.handleOnChangeInput(event,'phoneNumber')}} value={this.state.phoneNumber}></input>
+                            </div>
+                            <div className='input-container max-width-input'>
+                                <label>gender</label>
+                                <select type='text' onChange={(event) => { this.handleOnChangeInput(event, 'gender') }} value={this.state.gender}>
+                                        <option value="0">Male</option>
+                                        <option value="1">Female</option>
+                                </select>
                             </div>
                         </div>                     
                     </ModalBody>

@@ -16,9 +16,11 @@ import Home from '../routes/Home';
 import Login from './Auth/Login'
 import Header from './Header/Header';
 import System from '../routes/System';
+import StudentExam from './System/StudentExam';
 
 import { CustomToastCloseButton } from '../components/CustomToast';
 import ConfirmModal from '../components/ConfirmModal';
+import ExamManage from './System/ExamManage';
 
 class App extends Component {
 
@@ -54,6 +56,8 @@ class App extends Component {
                                 <Route path={path.HOME} exact component={(Home)} />
                                 <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
                                 <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
+                                <Route path={'/Student'} component={userIsAuthenticated(StudentExam)} />
+                                <Route path={'/Teacher'} component={userIsAuthenticated(ExamManage)} />
                                 <Route path={path.HOMEPAGE} component={HomePage} />
                             </Switch>
                             </CustomScrollbars>

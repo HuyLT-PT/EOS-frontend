@@ -15,7 +15,8 @@ class ModalEditExam extends Component {
            subject: '',
            time: '',
            numberOfQuestion: '',
-           impClass:'',
+           impClass: '',
+           status: ''
        }
     }
 
@@ -28,7 +29,8 @@ class ModalEditExam extends Component {
                 subject: exam.subject,
                 time:exam.time,
                 numberOfQuestion: exam.numberOfQuestion,
-                impClass:exam.impClass,
+                impClass: exam.impClass,
+                status:exam.status
             })
         }
     }
@@ -102,6 +104,13 @@ class ModalEditExam extends Component {
                             <div className='input-container max-width-input'>
                                 <label>ImpClass</label>
                                 <input type='text' onChange={(event)=>{this.handleOnChangeInput(event,'impClass')}} value={this.state.impClass}></input>
+                            </div>
+                            <div className='input-container max-width-input'>
+                                <label>Status</label>
+                                <select type='' onChange={(event) => { this.handleOnChangeInput(event, 'status') }} value={this.state.status}>
+                                    <option value="DONE">DONE</option>
+                                    <option value={null}>NOT DONE</option>
+                                </select>
                             </div>
                         </div>                     
                     </ModalBody>

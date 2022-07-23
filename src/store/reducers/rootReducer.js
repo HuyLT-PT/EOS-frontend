@@ -23,7 +23,7 @@ const persistCommonConfig = {
 const userPersistConfig = {
     ...persistCommonConfig,
     key: 'user',
-    whitelist: ['isLoggedIn', 'userInfo']
+    whitelist: ['isLoggedIn', 'userInfo',]
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export

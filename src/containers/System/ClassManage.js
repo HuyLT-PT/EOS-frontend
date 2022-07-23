@@ -5,6 +5,7 @@ import ModalStudentList from './ModalStudentList';
 import { getAllStudents } from '../../services/userService'
 import { getAllExams } from '../../services/examService';
 import ModalExamList from './ModalExamList';
+import { Arc } from '@progress/kendo-drawing';
 class ClassManage extends Component {
 
    constructor(props) {
@@ -27,9 +28,11 @@ async  componentDidMount() {
     await this.getAllClassesFromReact()
  
     }
-    getAllClassesFromReact   = async() => {
+    getAllClassesFromReact = async () => {
+        
+        
         let response = await getAllClasses('ALL')
-       // console.log(response)
+       
        if (response && response.errCode === 0) {
            this.setState({
                arrClass: response.classes,
@@ -39,6 +42,7 @@ async  componentDidMount() {
            }) 
         }
         let arrC = this.state.arrClass
+        
         let arrS = this.state.countS
         let arrE = this.state.countE
         arrC&&arrC.map((index1, item1) => {
@@ -50,6 +54,7 @@ async  componentDidMount() {
                                 
             })
         })
+        
         arrC&&arrC.map((index1, item1) => {
             arrE && arrE.map((index2, item2) => {
                    if (index1.name === index2.impClass) {
@@ -58,6 +63,7 @@ async  componentDidMount() {
                             
             })
         })
+   
         this.setState({
             arrClass : arrC
         })
@@ -93,7 +99,7 @@ async  componentDidMount() {
     handleViewExam = async (data) => {
         let arr = await getAllExams(data.id)
         let stt =[]
-        for (let i = 0; i < arr.exams.length; i++){
+        for (let i = 0; i < arr.data.length; i++){
                 stt.push(i+1)
         } 
         this.setState({
@@ -105,10 +111,15 @@ async  componentDidMount() {
     }
     
     render() {
+
+        let t = this.props.userInfo.class
+        
+        
+     
         let arrC = this.state.arrClass
         let arrT = this.state.arrTeacher
-        
-       arrT&&arrT.map((index1, item1) => {
+        let arr = ''
+        arrT&&arrT.map((index1, item1) => {
             arrC && arrC.map((index2, item2) => {
                                 
                     if (index1.id === index2.teacherId) {
@@ -116,7 +127,13 @@ async  componentDidMount() {
                     }              
             })
         })
-
+        if (t===null) {arr =arrC}
+        for (let i = 0; i < arrC.length; i++){
+            if (arrC[i].name === t) {
+                arr = [arrC[i]]
+            }
+        }
+       
         return (
             
             <>
@@ -161,10 +178,10 @@ async  componentDidMount() {
                             <th scope="col">Actions</th>
                         </tr>
                         {
-                                arrC && arrC.map((item, index) => {
+                                arr && arr.map((item, index) => {
 
 
-                                     
+                              
                                     return (
                                         <tr>
                                             <td>{item.id} </td>
@@ -195,6 +212,8 @@ async  componentDidMount() {
 
 const mapStateToProps = state => {
     return {
+        userInfo: state.user.userInfo,
+        isLoggedIn: state.user.isLoggedIn
     };
 };
 

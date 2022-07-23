@@ -6,6 +6,10 @@ const getAllQuestions = (inputId) => {
     // template string
     return axios.get(`/api/get-question?id=${inputId}`);
 }
+const getAllQuestionsForTeacher = (inputId) => {
+    // template string
+    return axios.get(`/api/get-question-for-teacher?id=${inputId}`);
+}
 const editQuestionService = (data) => {
     return axios.put('/api/edit-question', data)
 }
@@ -20,5 +24,6 @@ export {
     getAllQuestions,
     editQuestionService,
     downloadExamFromReact,
-    saveAnswer2DB
+    saveAnswer2DB,
+    getAllQuestionsForTeacher,
 }

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './HomePage.scss'
-class Header extends Component {
+import { Link } from 'react-router-dom';
+class HeaderHome extends Component {
 
     render() {
       
@@ -28,7 +29,7 @@ class Header extends Component {
                                 </ul>
                             </li>
                             <li><p href='##'>Contact</p></li>
-                            <li><i className='fas fa-user-circle'></i></li>
+                            <li><Link to="/system/exam-manage"><i className='fas fa-user-circle'/></Link></li>
                         </ul>
                     </nav>
                 </header>
@@ -88,4 +89,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderHome);

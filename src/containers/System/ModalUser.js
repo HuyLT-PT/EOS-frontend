@@ -13,7 +13,12 @@ class ModalUser extends Component {
            password: '',
            firstName: '',
            lastName: '',
-           address:'',
+           address: '',
+           dateOfBirth: '',
+            phoneNumber: '',
+            class: '',
+            roleId: '',
+            gender: ''
        }
 
        this.listenToEmitter()
@@ -26,7 +31,12 @@ class ModalUser extends Component {
                 password: '',
                 firstName: '',
                 lastName: '',
-                address:'',
+                address: '',
+                dateOfBirth: '',
+                phoneNumber: '',
+                class: '',
+                roleId: '',
+                gender: ''
             })
         })
     }
@@ -50,7 +60,7 @@ class ModalUser extends Component {
     }
     checkValideInput = () => {
         let isValid = true 
-        let arrInput = ['email', 'password', 'firstName', 'lastName', 'address']
+        let arrInput = ['email', 'password']
         for (let i = 0; i < arrInput.length;i++){
             if (!this.state[arrInput[i]]) {
                 isValid = false
@@ -103,8 +113,31 @@ class ModalUser extends Component {
                                 <input type='text' onChange={(event)=>{this.handleOnChangeInput(event,'lastName')}} value={this.state.lastName}></input>
                             </div>
                             <div className='input-container max-width-input'>
+                                <label>Class</label>
+                                <input type='text' onChange={(event)=>{this.handleOnChangeInput(event,'class')}} value={this.state.class}></input>
+                            </div>
+                            <div className='input-container max-width-input'>
                                 <label>Address</label>
                                 <input type='text' onChange={(event)=>{this.handleOnChangeInput(event,'address')}} value={this.state.address}></input>
+                            </div>
+                            <div className='input-container max-width-input'>
+                                <label>Date Of Birth</label>
+                                <input type='text' onChange={(event)=>{this.handleOnChangeInput(event,'dateOfBirth')}} value={this.state.dateOfBirth}></input>
+                            </div>
+                            <div className='input-container max-width-input'>
+                                <label>Phone Number</label>
+                                <input type='text' onChange={(event)=>{this.handleOnChangeInput(event,'phoneNumber')}} value={this.state.phoneNumber}></input>
+                            </div>
+                            <div className='input-container max-width-input'>
+                                <label>RoleId</label>
+                                <input type='text' onChange={(event)=>{this.handleOnChangeInput(event,'roleId')}} value={this.state.roleId}></input>
+                            </div>
+                            <div className='input-container max-width-input'>
+                                <label>gender</label>
+                                <select type='text' onChange={(event) => { this.handleOnChangeInput(event, 'gender') }} value={this.state.gender}>
+                                        <option value="0">Male</option>
+                                        <option value="1">Female</option>
+                                </select>
                             </div>
                         </div>                     
                     </ModalBody>

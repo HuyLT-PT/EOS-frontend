@@ -25,7 +25,7 @@ class Question extends Component {
 
        if (response && response.errCode === 0) {
            this.setState({
-               arrQuestions: response.questionsList
+               arrQuestions: response.data
            }) 
         }
     }

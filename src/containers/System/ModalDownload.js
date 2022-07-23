@@ -38,7 +38,7 @@ class ModalDownload extends Component {
             arr.push(i+1)
         }
         this.setState({
-            arrQuesiton: res.questionsList,
+            arrQuesiton: res.data,
             STT : arr
             
         })

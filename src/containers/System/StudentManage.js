@@ -114,7 +114,7 @@ class StudentManage extends Component {
                                             <td>{item.createdAt} </td>
                                             <td>{item.updatedAt} </td>
                                             <td>
-                                                <button className='btn-edit' ><i className='far fa-eye'></i></button>
+                                          
                                                 <button className='btn-delete'><i className='fas fa-plus' onClick={() => { this.handleAddStudend2Class(item) }}></i></button>
                                             </td>
                                         </tr>

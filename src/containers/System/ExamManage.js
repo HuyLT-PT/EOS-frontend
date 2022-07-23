@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { getAllExams, deleteExamService, editExamService, createNewExamService } from '../../services/examService'
-import {getAllQuestions}  from '../../services/questionService'
 import ModalEditExam from './ModalEditExam';
 import ModalExam from './ModalExam';
 import { emitter } from '../../utils/emitter'
@@ -75,7 +74,7 @@ class ExamManage extends Component {
         let response = await getAllExams('ALL')
        if (response && response.errCode === 0) {
            this.setState({
-               arrExams: response.exams
+               arrExams: response.data
            }) 
        }
     }
@@ -146,6 +145,7 @@ class ExamManage extends Component {
         })
     }
     doEditExam = async (exam) => {
+        console.log(exam)
         try {
             let res = await editExamService(exam)
             if (res && res.errCode === 0) {
@@ -225,6 +225,7 @@ class ExamManage extends Component {
                             <th scope="col">Time</th>
                             <th scope="col">NumberOfQuestion</th>
                             <th scope="col">ImpClass</th>
+                            <th scope="col">Status</th>
                             <th scope="col">CreateAt</th>
                             <th scope="col">UpdateAt</th>
                             <th scope="col">Actions</th>
@@ -240,6 +241,7 @@ class ExamManage extends Component {
                                             <td>{item.time} </td>
                                             <td>{item.numberOfQuestion} </td>
                                             <td>{item.impClass} </td>
+                                            <td>{item.status} </td>
                                             <td>{item.createdAt} </td>
                                             <td>{item.updatedAt} </td>
                                             <td>

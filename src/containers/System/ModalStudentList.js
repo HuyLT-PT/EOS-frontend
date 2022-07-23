@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { emitter } from '../../utils/emitter'
 import _ from 'lodash'
-import { getAllQuestions , editQuestionService } from '../../services/questionService'
 import ModalQuestionView from './ModalQuestionView';
 import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
 const pdfExportComponent = React.createRef(null);

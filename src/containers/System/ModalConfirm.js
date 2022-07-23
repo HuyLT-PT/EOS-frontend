@@ -36,6 +36,7 @@ class ModalConfirm extends Component {
                     className={'modal-user-container'}
                     size='lg'
                     centered
+                    
                 >
                     <ModalHeader toggle={() => { this.toggle() }}> CLASS {arr.impClass+' '+arr.name} </ModalHeader>
                     <ModalBody>
@@ -49,7 +50,7 @@ class ModalConfirm extends Component {
                         </div>
                     </ModalBody>
                     <ModalFooter>
-                        <Link to="/system/exam-question"><Button color="primary" className='px-3'>OKELA</Button></Link>{' '}
+                        {/*<Link to="/system/exam-question"><Button color="primary" className='px-3'>OKELA</Button></Link>{' '} */ }
                         <Button color="secondary" className='px-3' onClick={() => { this.toggle() }}>Close</Button>{' '}
                         <Button color="secondary" className='px-3' onClick={() => { this.handleOpenExam() }}>Ok</Button>{' '}
                     </ModalFooter>

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { emitter } from '../../utils/emitter'
 import _ from 'lodash'
-import { getAllQuestions , editQuestionService } from '../../services/questionService'
+import { getAllQuestions , editQuestionService, getAllQuestionsForTeacher } from '../../services/questionService'
 import ModalQuestionView from './ModalQuestionView';
 
 class ModalQuestionList extends Component {
@@ -73,8 +73,8 @@ class ModalQuestionList extends Component {
     }
 
     getAllQuestonsFromExam = async(examId) => {
-        let response = await getAllQuestions(examId)
-        let arr = response.questionsList
+        let response = await getAllQuestionsForTeacher(examId)
+        let arr = response.data
 
         // console.log(response)
        if (response && response.errCode === 0) {
@@ -89,10 +89,10 @@ class ModalQuestionList extends Component {
  
             let arr = question.arrKey
             question.key = ''
-                if (arr[0] === true) { question.key = question.key + ' '+ 'A' }
-                if (arr[1] === true) { question.key = question.key + ' '+ 'B'}
-                if (arr[2] === true) { question.key = question.key + ' '+ 'C' }
-                if (arr[3] === true) { question.key = question.key + ' '+ 'D' }
+                if (arr[0] === true) { question.key = question.key + 'A'}
+                if (arr[1] === true) { question.key = question.key + 'B'}
+                if (arr[2] === true) { question.key = question.key + 'C'}
+                if (arr[3] === true) { question.key = question.key + 'D'}
           
       
             let res = await editQuestionService(question)

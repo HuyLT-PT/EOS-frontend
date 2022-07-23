@@ -41,6 +41,26 @@
             "system-parameter": {
                 "header": "System-parameter"
             }
+        },
+        "admin": { 
+                "admin" : "Admin",        
+                "user-manage": "User manage",
+                "class-manage" : "Class-manage",
+                "student-manage" : "Student-manage",
+                "student-exam" : "Student-exam",
+                "product-manage": "Package manage",
+                "exam-manage": "Exam-manage"
+        },
+         "teacher": { 
+                "teacher" : "Teacher",        
+                "class-manage" : "Class-manage",
+                "student-manage" : "Student-manage",
+                "exam-manage": "Exam-manage"
+        },
+         "student": { 
+                "student" : "Student",        
+                "student-exam" : "Student-exam",
+                "product-manage": "Package manage"
         }
     },
     "system": {
