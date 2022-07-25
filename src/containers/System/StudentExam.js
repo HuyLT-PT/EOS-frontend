@@ -26,8 +26,8 @@ class StudentExam extends Component {
            countE: [],
            arrExam:[] ,
            classIdOfStudent: 1,
-           isOpen: new Array(15).fill(true),
-           point: new Array(15).fill(0),
+           isOpen: new Array(20).fill(true),
+           point: new Array(20).fill(0),
            time4s: '',
            isOpenModalShowTime: '',
            timeStart :''
@@ -36,25 +36,45 @@ class StudentExam extends Component {
 
     async componentDidMount() {
         await this.getAllClassesForStudent()
-        let point = await getResultExam(1)
-       
-        let arr = this.state.point
-        let arr2 = this.state.isOpen
-        arr[0] = point
-        arr2[0] = false
-        //console.log(arr,arr2)
-         this.setState({
-            
-            isOpen: arr2,
-            point: arr
-         })
+        await this.getExamResult()
         
-        // test API
 
 
          
     }
+    getExamResult = async () => {
+        let arr = []
+        let t = this.props.userInfo.class
+        let userId = this.props.userInfo.id
+        let arrE =this.state.countE 
+        if (t === null) { arr = arrE }
+        for (let i = 0; i < arrE.length; i++){
+            if (arrE[i].impClass === t) {
+               arr.push(arrE[i])
+            }
+        }
+        let arr1 = this.state.point
+        let arr2 = this.state.isOpen
+         for (let i = 0; i < arr.length; i++){
+             let examId = arr[i].id
+             let point = await getResultExam(examId, userId)
 
+             if (point === -1) {
+                 
+             } else {
+                 arr1[i] = point
+                 arr2[i] = false
+                 this.setState({
+            
+                     isOpen: arr2,
+                     point: arr1
+                 })
+             }
+        }
+
+       
+        
+    } 
     getAllClassesForStudent   = async() => {
         let response = await getAllExams('ALL')
     
@@ -66,7 +86,7 @@ class StudentExam extends Component {
     }
     handleDoExam = (data) => {
         //console.log(data)
-        if (data.status === null || this.state.isOpen[data.id-1] === false) {
+        if (data.status !== 'In-progress' || this.state.isOpen[data.id-1] === false) {
             alert('Incomplete Exam or You completed this exam')
         } else {
             this.setState({
@@ -80,7 +100,7 @@ class StudentExam extends Component {
     
         let time = this.state.arrExam.time*60*1000
          
-        let end = now + 2*60*1000  //time
+        let end = now + time
 
         end = new Date(end) 
         
@@ -140,36 +160,25 @@ class StudentExam extends Component {
         })
     }
     render() {
-
-        
+       
+    
         let arrE = this.state.countE
         let arr = []
         let t = this.props.userInfo.class
-         if (t === null) { arr = arrE }
+        if (t === null) { arr = arrE }
         for (let i = 0; i < arrE.length; i++){
             if (arrE[i].impClass === t) {
                arr.push(arrE[i])
             }
         }
       
-    
-        
         return (
             
         
             <>  
                 <div className='elm' >
                     <div className='elm1' >
-                { /*  this.state.isOpenModalShowTime&&
-                    <ModalShowTime
-                        isOpen={this.state.isOpenModalShowTime}
-                        toggle={this.toggle3}
-                       
-                        
-                    />
-                
 
-        */   }
                     </div>
                     <div className='elm2 '>
                 {   this.state.isOpenModalDoExam&&
@@ -233,7 +242,7 @@ class StudentExam extends Component {
                                             <td>{item.time} </td>
                                             <td>{item.numberOfQuestion}</td>
                                             <td>{item.status}</td>
-                                            <td>{this.state.isOpen[index]===true? 'Chua thi':` ${this.state.point[index]+ '/'+ item.numberOfQuestion} `}</td>
+                                            <td>{this.state.isOpen[index]===true? 'Not yet exam':` ${this.state.point[index]+ '/'+ item.numberOfQuestion} `}</td>
                                              <td>
                                                 <button className='btn-view' onClick={() => { this.handleDoExam(item) }}><i className='fas fa-file'></i></button>
                                                 

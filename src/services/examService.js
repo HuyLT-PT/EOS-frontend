@@ -6,9 +6,9 @@ const getAllExams = (inputId) => {
     // template string
     return axios.get(`/api/get-exam?id=${inputId}`);
 }
-const getAnswerFromStudent = (inputId) => {
+const getAnswerFromStudent = (inputId,studentId) => {
     // template string
-    return axios.get(`/api/get-answer?id=${inputId}`);
+    return axios.get(`/api/get-answer?id=${inputId}&std=${studentId}`);
 }
 const deleteExamService = (examId) => {
     return axios.delete('/api/delete-exam', {
@@ -23,8 +23,8 @@ const createNewExamService = (data) => {
 const editExamService = (data) => {
     return axios.put('/api/edit-exam', data)
 }
-const getResultExam = (examId) => {
-    return axios.get(`/api/get-point?id=${examId}`)
+const getResultExam = (examId,studentId) => {
+    return axios.get(`/api/get-point?id=${examId}&sid=${studentId}`)
 }
 const saveExam = (data) => {
     return axios.put('/api/save-exam', data)

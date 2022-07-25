@@ -108,8 +108,9 @@ class ModalEditExam extends Component {
                             <div className='input-container max-width-input'>
                                 <label>Status</label>
                                 <select type='' onChange={(event) => { this.handleOnChangeInput(event, 'status') }} value={this.state.status}>
-                                    <option value="DONE">DONE</option>
-                                    <option value={null}>NOT DONE</option>
+                                    <option value="Initialize">Initialize</option>
+                                    <option value='In-progress'>In-progress</option>
+                                    <option value='Done'>Done</option>
                                 </select>
                             </div>
                         </div>                     

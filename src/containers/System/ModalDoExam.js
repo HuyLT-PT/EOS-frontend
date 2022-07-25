@@ -9,10 +9,10 @@ import {getResultExam,getAnswerFromStudent,saveExam,uploadImgForExamAns} from '.
 import {Example} from './Example'
 import { assignUniqueKeysToParts } from 'react-intl/src/utils';
 
-function test() {
+function test(id1,id2) {
     let t = Date.parse(new Date())
 
-    let d = Date.parse(localStorage.getItem('user1exam2'))
+    let d = Date.parse(localStorage.getItem(`user${id1}exam${id2}`))
     
 
 
@@ -41,7 +41,7 @@ class ModalDoExam extends Component {
 
      let t = setInterval( async() => { 
          
-        let x= test()
+        let x= test(this.props.userInfo.id,exam.id)
          
         
         
@@ -69,12 +69,7 @@ class ModalDoExam extends Component {
     
       await this.getAnswer()
      
-     // test APi
-    /* let data = { examId: 3, studentId: 3 }
      
-     let test = await uploadImgForExamAns(data)
-     console.log(data)*/
-            
             
     }
     getAllQuestionsFromExam = async(examId) => {
@@ -125,7 +120,7 @@ class ModalDoExam extends Component {
                 if (arr[3] === true) { key = key + 'D'}
         data.key = key  
 
-        
+        data.studentId = this.props.userInfo.id
 
         let res = await saveAnswer2DB(data) 
         
@@ -133,19 +128,47 @@ class ModalDoExam extends Component {
     
     }
     submitExam = async () => {
-        let res = await getResultExam(this.state.id)
+        let n = this.state.numberOfQuestion
+        let arr = new Array(n)
+        for (let i = 0; i < n; i++){
+            arr[i] = {
+                questionId: this.state.arrQuestions[i].id,
+                studentAnswer : ''
+             }
+        
+        }
+        let ans = await getAnswerFromStudent(this.state.id, this.props.userInfo.id) 
+        for (let j = 0; j < n; j++){
+            for (let i = 0; i < ans.length; i++){
+                if (arr[j].questionId === ans[i].questionId) {
+                arr[j] = {
+                    questionId :ans[i].questionId,
+                studentAnswer :  ans[i].studentAnswer
+             }
+            }
+            
+        
+     
+          
+        }
+        }
+            
+         console.log(arr)
         let data = {}
         data.examId = this.state.id
         data.studentId = this.props.userInfo.id
-        data.data = this.state.studentAns
+        data.data = arr
        
-         let save = await saveExam(data)
+         await saveExam(data)
+        let res = await getResultExam(this.state.id, this.props.userInfo.id)
+
+
         alert(res + '/' + this.state.numberOfQuestion)
-        this.props.checkPoint(res)
+         this.props.checkPoint(res)
     }
     getAnswer = async () => {
        
-        let ans = await getAnswerFromStudent(this.state.id) 
+        let ans = await getAnswerFromStudent(this.state.id,this.props.userInfo.id) 
        
         this.setState({
             studentAns : ans
@@ -172,6 +195,7 @@ class ModalDoExam extends Component {
 
     render() {
 
+       // console.log(this.state.studentAns)
         let STT = []
         for (let i = 0; i < this.state.numberOfQuestion; i++) {
             STT.push(i+1)
@@ -203,7 +227,7 @@ class ModalDoExam extends Component {
                         </p>
                         <p style={{ fontSize: '15px' }}>Time to End :
                             <br></br>
-                            {localStorage.getItem('user1exam2')}
+                            {localStorage.getItem(`user${this.props.userInfo.id}exam${this.state.id}`)}
                         </p>
                    
                 </div>

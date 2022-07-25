@@ -172,6 +172,16 @@ class ExamManage extends Component {
     render() {
         let arrExams = this.state.arrExams
         let curEx = this.state.currentExamFromExamList
+        
+        let arr =[]
+        let t = this.props.userInfo.class
+        if (t === null) { arr = arrExams }
+        for (let i = 0; i < arrExams.length; i++){
+            if (arrExams[i].impClass === t) {
+               arr.push(arrExams[i])
+            }
+        }
+        console.log(arr)
         return (
             <div className="Exam-container">
                 <ModalExam  
@@ -232,7 +242,7 @@ class ExamManage extends Component {
                         </tr>
                         
                             {
-                                arrExams && arrExams.map((item, index) => {
+                                arr && arr.map((item, index) => {
                                     return (
                                         <tr>
                                             <td>{item.id} </td>
@@ -266,6 +276,7 @@ class ExamManage extends Component {
 
 const mapStateToProps = state => {
     return {
+                userInfo: state.user.userInfo,
     };
 };
 
