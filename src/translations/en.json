@@ -36,6 +36,7 @@
                 "student-exam" : "Student-exam",
                 "product-manage": "Package manage",
                 "exam-manage": "Exam manage",
+               
                 "register-package-group-or-account": "Register service package for group/account"
             },
             "system-parameter": {
@@ -49,7 +50,8 @@
                 "student-manage" : "Student-manage",
                 "student-exam" : "Student-exam",
                 "product-manage": "Package manage",
-                "exam-manage": "Exam-manage"
+                "exam-manage": "Exam-manage",
+                "profile": "Profile"
         },
          "teacher": { 
                 "teacher" : "Teacher",        

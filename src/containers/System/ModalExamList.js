@@ -28,9 +28,9 @@ class ModalExamList extends Component {
          pdfExportComponent.current.save();
     }
     render() {
-
+        
         let STT = this.props.STT
-        let arrE = this.props.arrExam.exams
+        let arrE = this.props.arrExam.data
         let mes = ''
 
         if (STT.length === 0) {

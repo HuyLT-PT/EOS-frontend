@@ -29,7 +29,7 @@ class HeaderHome extends Component {
                                 </ul>
                             </li>
                             <li><p href='##'>Contact</p></li>
-                            <li><Link to="/system/exam-manage"><i className='fas fa-user-circle'/></Link></li>
+                            <li><Link to="/system/profile"><i className='fas fa-user-circle'/></Link></li>
                         </ul>
                     </nav>
                 </header>
