@@ -10,10 +10,7 @@ export const adminMenu = [
                 name: 'menu.admin.class-manage',link: '/system/class-manage'
                
             },
-            {
-                name: 'menu.admin.student-manage',link :'/system/student-manage'
-               
-            },
+           
              {
                 name: 'menu.admin.student-exam',link: '/system/student-exam'
                
@@ -42,6 +39,10 @@ export const studentMenu = [
                 name: 'menu.student.student-exam',link: '/system/student-exam'
                
             },
+            {
+                name: 'menu.admin.profile',link: '/system/profile'
+                
+            },
         ]
     },
 ];
@@ -60,6 +61,10 @@ export const teacherMenu = [
             },
             {
                 name: 'menu.teacher.exam-manage',link: '/system/exam-manage'
+                
+            },
+            {
+                name: 'menu.admin.profile',link: '/system/profile'
                 
             },
         ]

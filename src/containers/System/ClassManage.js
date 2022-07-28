@@ -21,12 +21,34 @@ class ClassManage extends Component {
            arrTeacher: [],
            countS: [],
            countE: [],
+           std: [],
+           studentId:''
        }
     }
 
 async  componentDidMount() {
     await this.getAllClassesFromReact()
- 
+    await this.getAllStudents()
+   
+    }
+    getAllStudents = async () => {
+        let res = await getAllStudents('ALL')
+        let arr = []
+        let sclass = this.props.userInfo.class
+        if (sclass === null) {
+            this.setState({
+            std:res.users
+            })
+        } else {
+            let t= res.users
+        for (let i = 0; i < t.length; i++){
+            if(t[i].class===sclass){arr.push(t[i])}
+        }
+        this.setState({
+            std:arr
+        })
+        }
+        
     }
     getAllClassesFromReact = async () => {
         
@@ -78,6 +100,7 @@ async  componentDidMount() {
             isOpenModalExamList : !this.state.isOpenModalExamList
         })
     }
+ 
     handleViewStudent = async(data) => {
         
         let arr = await getAllStudents(data.id) 
@@ -95,6 +118,9 @@ async  componentDidMount() {
             class1 : data.name,
         })
     }
+    handleViewStudentInfo = async(data) => {
+        alert('update soon')
+    }
 
     handleViewExam = async (data) => {
         let arr = await getAllExams(data.id)
@@ -109,13 +135,27 @@ async  componentDidMount() {
             class2:data.name
         })
     }
+    handleViewExamInfo = async (data) => {
+  
+       this.setState({
+           isOpenModalExamList: true,
+           studentId: data.id
+        })
+    }
     
     render() {
 
         let t = this.props.userInfo.class
         
+        let test = []
+        if (t === '12A1') { test.id = 1 }
+        if (t === '12A2') { test.id = 2 }
+        if (t === '12A3') { test.id = 3 }
+        if (t === '12A4') { test.id = 4 }
+        if (t === '12A5') { test.id = 5 }
+       
         
-     
+        
         let arrC = this.state.arrClass
         let arrT = this.state.arrTeacher
         let arr = ''
@@ -133,7 +173,8 @@ async  componentDidMount() {
                 arr = [arrC[i]]
             }
         }
-       
+        let std = this.state.std
+      
         return (
             
             <>
@@ -152,16 +193,22 @@ async  componentDidMount() {
                         toggle={this.toggleExamListModal}
                         arrExam={this.state.arrExam}
                         STT={this.state.STT2}
-                        class ={ this.state.class2}
+                        class={this.state.class2}
+                        classId={test.id}
+                        stdId={this.state.studentId}
                        
                     />            
                 }
                <div className="Exam-container">
                 <div className='title text-center'>Manage Class</div>
                 <div className='mx-1'>
-                    <button className='btn btn-primary px-3' >
-                        <i className='fas fa-plus'></i>
-                        Add Class
+                
+                        <button className='btn btn-primary px-3'
+                            
+                            onClick={() => { this.handleViewStudent(test) }}
+                        >
+                   
+                        Student List
                     </button>
                 </div>
                 <div className='Exam-table mt-3 mx-1'>
@@ -169,31 +216,35 @@ async  componentDidMount() {
                         <tbody>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Teacher</th>
-                            <th scope="col">NumberOfStudent</th>
-                            <th scope="col">examImp</th>
-                            <th scope="col">CreateAt</th>
-                            <th scope="col">UpdateAt</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Class</th>
+                            <th scope="col">FirstName</th>
+                            <th scope="col">LastName</th>
+                             <th scope="col">DateOfBirth</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Address</th>
+                            <th scope="col">PhoneNumber</th>
+                            <th scope="col">Info</th>
                         </tr>
                         {
-                                arr && arr.map((item, index) => {
+                                std && std.map((item, index) => {
 
 
                               
                                     return (
                                         <tr>
-                                            <td>{item.id} </td>
-                                            <td>{item.name} </td>
-                                            <td>{item.teacher} </td>
-                                            <td>{item.numberOfStudent} </td>
-                                            <td>{item.examImp}</td>
-                                            <td>{item.createdAt} </td>
-                                            <td>{item.updatedAt} </td>
+                                            <td>{index+1} </td>
+                                            <td>{item.email} </td>
+                                            <td>{item.class} </td>
+                                            <td>{item.firstName} </td>
+                                            <td>{item.lastName} </td>
+                                            <td>{item.dateOfBirth}</td>
+                                            <td>{item.gender?'FeMale':'Male'} </td>
+                                            <td>{item.address} </td>
+                                            <td>{item.phoneNumber} </td>
                                             <td>
-                                                <button className='btn-view' onClick= { ()=>{this.handleViewStudent(item)}}><i className='fas fa-users'></i></button>
-                                                <button className='btn-edit' onClick= { ()=>{this.handleViewExam(item)}}><i className='fas fa-file'></i></button>
+                                                <button className='btn-view' onClick= { ()=>{this.handleViewStudentInfo(item)}}><i className='fas fa-users'></i></button>
+                                                <button className='btn-edit' onClick= { ()=>{this.handleViewExamInfo(item)}}><i className='fas fa-file'></i></button>
                                             </td>
                                         </tr>
                                     )
