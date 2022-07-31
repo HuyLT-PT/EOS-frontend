@@ -12,6 +12,7 @@ import ModalQuestionView from './ModalQuestionView';
 import ModalQuestionList from './ModalQuestionList';
 import ModalDownload  from './ModalDownload';
 import { applyMiddleware } from 'redux';
+import ModalExamAnswer from './ModalExamAnswer';
 class ExamManage extends Component {
     // state
    constructor(props) {
@@ -28,7 +29,9 @@ class ExamManage extends Component {
            currentExamFromExamList: {},
            questionEdit: {} ,
            examForDownLoad: {},
-           isOpenModalDownload :  false
+           isOpenModalDownload: false,
+           isOpenModalExamAnswer: false,
+           currExamAns : []
        }
     }
 
@@ -68,7 +71,11 @@ class ExamManage extends Component {
             isOpenModalQuestionList: !this.state.isOpenModalQuestionList
       }) 
     }
-
+    toggleExamAns = () => {
+        this.setState({
+            isOpenModalExamAnswer :!this.state.isOpenModalExamAnswer
+      }) 
+    }
     // exam 
     getAllExamsFromReact = async() => {
         let response = await getAllExams('ALL')
@@ -130,7 +137,7 @@ class ExamManage extends Component {
         })
     }
     handleDowload = (exam) => {
-        alert('choose')
+        alert('you are downloading')
     }
     handleViewExam = async(exam) => {        
         let arr = []
@@ -162,6 +169,13 @@ class ExamManage extends Component {
             console.log(e)
         }
     }
+    handleViewExamAns = (data) => {
+   
+        this.setState({
+            isOpenModalExamAnswer: !this.state.isOpenModalExamAnswer, 
+            currExamAns:data    
+        })
+    }
     // Question
 
     editQuestion = () => {
@@ -181,7 +195,7 @@ class ExamManage extends Component {
                arr.push(arrExams[i])
             }
         }
-        console.log(arr)
+      
         return (
             <div className="Exam-container">
                 <ModalExam  
@@ -217,7 +231,14 @@ class ExamManage extends Component {
                         examForDownLoad ={this.state.examForDownLoad}
                     /> 
                 }
-
+                 {   
+                    this.state.isOpenModalExamAnswer &&
+                    <ModalExamAnswer
+                        isOpen={this.state.isOpenModalExamAnswer}
+                        toggleExamAns={this.toggleExamAns}
+                        exams= {this.state.currExamAns}
+                    />
+                }
                 <div className='title text-center'>Manage Exam</div>
                 <div className='mx-1'>
                     <button className='btn btn-primary px-3' onClick={()=>this.handlerAddNewExam()}>
@@ -260,6 +281,7 @@ class ExamManage extends Component {
                                                 <button className='btn-view' onClick={() => { this.handleViewExam(item) }}><i className='far fa-eye'></i></button>
                                                 <button className='btn-download' onClick={() => { this.handleDowloadExam(item) }}><i className='fas fa-sign-out-alt'></i></button>
                                                 <button className='btn-download' onClick={() => { this.handleDowload(item) }}><a href='https://drive.google.com/file/d/1YGknZQx8t4i-aspKFXr8HH5fIDNs47aR/view' > <i className='fas fa-sign-out-alt'/></a></button>
+                                                <button className='btn-edit' onClick= { ()=>{this.handleViewExamAns(item)}}><i className='fas fa-file'></i></button>
                                             </td>
                                         </tr>
                                     )

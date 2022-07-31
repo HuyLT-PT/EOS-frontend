@@ -34,6 +34,7 @@ class ModalStudentList extends Component {
         if (STT.length === 0) {
             mes = 'HAS NO STUDENTS'
         }
+        let c =arrS[0].class
         return (
                 
             <>  
@@ -44,9 +45,9 @@ class ModalStudentList extends Component {
                     size='lg'
                     centered
                 >
-                    <ModalHeader toggle={() => { this.toggle() }}>CLASS  {this.props.Class}  {mes}</ModalHeader>
+                    <ModalHeader toggle={() => { this.toggle() }}>CLASS  {c}  </ModalHeader>
                     <ModalBody>
-                        <PDFExport paperSize='auto' margin="2cm" ref={pdfExportComponent} fileName={this.props.Class +'Students'} >
+                        <PDFExport paperSize='auto' margin="2cm" ref={pdfExportComponent} fileName={c +'_Students'} >
                          <div className='Exam-table mt-3 mx-1'>
                                 <table id="customers">
                                 <tbody>
